@@ -1,0 +1,163 @@
+services:
+  tun2proxy-1:
+    image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
+    container_name: tun2proxy-1
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv6.conf.default.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    command: --proxy socks5://SITHIMY5202:0rf81r1aanxa@216.98.228.143:5844 --dns virtual
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "cat", "/proc/net/dev"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  ubuntu-1:
+    build: .
+    network_mode: "container:tun2proxy-1"
+    stdin_open: true
+    tty: true
+    depends_on:
+      tun2proxy-1:
+        condition: service_healthy
+    restart: on-failure
+
+  tun2proxy-2:
+    image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
+    container_name: tun2proxy-2
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv6.conf.default.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    command: --proxy socks5://SITHIMY5202:0rf81r1aanxa@72.1.179.56:6450 --dns virtual
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "cat", "/proc/net/dev"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  ubuntu-2:
+    build: .
+    network_mode: "container:tun2proxy-2"
+    stdin_open: true
+    tty: true
+    depends_on:
+      tun2proxy-2:
+        condition: service_healthy
+    restart: on-failure
+
+  tun2proxy-3:
+    image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
+    container_name: tun2proxy-3
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv6.conf.default.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    command: --proxy socks5://SITHIMY5202:0rf81r1aanxa@45.56.160.178:7721 --dns virtual
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "cat", "/proc/net/dev"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  ubuntu-3:
+    build: .
+    network_mode: "container:tun2proxy-3"
+    stdin_open: true
+    tty: true
+    depends_on:
+      tun2proxy-3:
+        condition: service_healthy
+    restart: on-failure
+
+  tun2proxy-4:
+    image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
+    container_name: tun2proxy-4
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv6.conf.default.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    command: --proxy socks5://SITHIMY5202:0rf81r1aanxa@198.145.102.114:5470 --dns virtual
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "cat", "/proc/net/dev"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  ubuntu-4:
+    build: .
+    network_mode: "container:tun2proxy-4"
+    stdin_open: true
+    tty: true
+    depends_on:
+      tun2proxy-4:
+        condition: service_healthy
+    restart: on-failure
+
+  tun2proxy-5:
+    image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
+    container_name: tun2proxy-5
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv6.conf.default.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    command: --proxy socks5://SITHIMY5202:0rf81r1aanxa@9.142.39.191:7361 --dns virtual
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "cat", "/proc/net/dev"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  ubuntu-5:
+    build: .
+    network_mode: "container:tun2proxy-5"
+    stdin_open: true
+    tty: true
+    depends_on:
+      tun2proxy-5:
+        condition: service_healthy
+    restart: on-failure
+
+  tun2proxy-6:
+    image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
+    container_name: tun2proxy-6
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv6.conf.default.disable_ipv6=0
+    cap_add:
+      - NET_ADMIN
+    command: --proxy socks5://SITHIMY5202:0rf81r1aanxa@9.142.30.192:5850 --dns virtual
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "cat", "/proc/net/dev"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  ubuntu-6:
+    build: .
+    network_mode: "container:tun2proxy-6"
+    stdin_open: true
+    tty: true
+    depends_on:
+      tun2proxy-6:
+        condition: service_healthy
+    restart: on-failure
+

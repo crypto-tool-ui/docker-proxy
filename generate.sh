@@ -24,10 +24,11 @@ for i in "${!PROXIES[@]}"; do
   tun2proxy-${N}:
     image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
     container_name: tun2proxy-${N}
-    volumes:
+    devices:
       - /dev/net/tun:/dev/net/tun
     sysctls:
-      - net.ipv6.conf.default.disable_ipv6=0
+      - net.ipv6.conf.all.disable_ipv6=1
+      - net.ipv6.conf.default.disable_ipv6=1
     cap_add:
       - NET_ADMIN
     command: --proxy socks5://${PROXY} --dns virtual

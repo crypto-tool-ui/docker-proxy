@@ -3,12 +3,7 @@
 
 # Danh sách proxy: "user:pass@host:port"
 PROXIES=(
-  SITHIMY5202:0rf81r1aanxa@216.98.228.143:5844
-  SITHIMY5202:0rf81r1aanxa@72.1.179.56:6450
-  SITHIMY5202:0rf81r1aanxa@45.56.160.178:7721
-  SITHIMY5202:0rf81r1aanxa@198.145.102.114:5470
-  SITHIMY5202:0rf81r1aanxa@9.142.39.191:7361
-  SITHIMY5202:0rf81r1aanxa@9.142.30.192:5850
+
 )
 
 cat > docker-compose.yml << 'HEADER'

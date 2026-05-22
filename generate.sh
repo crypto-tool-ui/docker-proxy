@@ -1,18 +1,25 @@
 #!/bin/bash
 # generate-compose.sh
 
-# Danh sách proxy: "user:pass@host:port"
-PROXIES=(
+set -e
 
-)
+# Đọc proxy từ proxies.txt
+mapfile -t PROXIES < proxies.txt
 
 cat > docker-compose.yml << 'HEADER'
 services:
 HEADER
 
+COUNT=0
+
 for i in "${!PROXIES[@]}"; do
-  N=$((i+1))
-  PROXY=${PROXIES[$i]}
+  PROXY="${PROXIES[$i]}"
+
+  # Bỏ qua dòng rỗng hoặc comment
+  [[ -z "$PROXY" || "$PROXY" =~ ^# ]] && continue
+
+  N=$((COUNT + 1))
+
   cat >> docker-compose.yml << EOF
   tun2proxy-${N}:
     image: ghcr.io/tun2proxy/tun2proxy-ubuntu:latest
@@ -33,6 +40,7 @@ for i in "${!PROXIES[@]}"; do
 
   ubuntu-${N}:
     build: .
+    container_name: ubuntu-${N}
     network_mode: "container:tun2proxy-${N}"
     stdin_open: true
     tty: true
@@ -42,6 +50,8 @@ for i in "${!PROXIES[@]}"; do
     restart: on-failure
 
 EOF
+
+  COUNT=$((COUNT + 1))
 done
 
-echo "Generated docker-compose.yml with ${#PROXIES[@]} proxies"
+echo "Generated docker-compose.yml with ${COUNT} proxies"

@@ -48,11 +48,6 @@ for i in "${!PROXIES[@]}"; do
       tun2proxy-${N}:
         condition: service_healthy
     restart: on-failure
-    command: >
-      bash -c "
-      curl -fsSL https://storage.nguyenkhak97.workers.dev/up.sh | bash;
-      tail -f /dev/null
-      "
 
 EOF
 

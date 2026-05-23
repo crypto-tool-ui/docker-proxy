@@ -30,7 +30,7 @@ for i in "${!PROXIES[@]}"; do
       - net.ipv6.conf.default.disable_ipv6=0
     cap_add:
       - NET_ADMIN
-    command: --proxy socks5://${PROXY} --dns virtual
+    command: --proxy socks5://${PROXY} --dns direct
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "cat", "/proc/net/dev"]
